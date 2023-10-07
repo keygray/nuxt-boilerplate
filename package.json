@@ -10,8 +10,8 @@
     "postinstall": "nuxt prepare",
     "type-check": "nuxi typecheck -noEmit -p tsconfig.json --composite false",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
-    "check:format": "prettier --check src/",
-    "format": "prettier --write src/",
+    "check:format": "prettier --check . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts",
+    "format": "prettier --write . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts",
     "prepare": "husky install"
   },
   "devDependencies": {
