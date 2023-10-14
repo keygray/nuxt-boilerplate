@@ -1,18 +1,18 @@
-import type { IGetUserParams, IUser } from './UserType'
-import useAxios from '../../composables/useAxios'
+import useAxios from '~/composables/useAxios'
+import type { IGetUserParams, ILoginQueryParams, IUser } from './UserType'
 
 enum ApiUrl {
-  getMe = '/me',
+  getMe = '/login',
   getUser = '/users/:id'
 }
 
-const getMe = () => {
-  const url = getMe.getUrl()
+const login = (params: ILoginQueryParams) => {
+  const url = login.getUrl()
   const axios = useAxios()
 
-  return axios.get<IUser>(url)
+  return axios.post<IUser>(url, params)
 }
-getMe.getUrl = () => ApiUrl.getMe
+login.getUrl = () => ApiUrl.getMe
 
 const getUser = ({ id }: IGetUserParams) => {
   const url = getUser.getUrl(id)
@@ -23,7 +23,7 @@ const getUser = ({ id }: IGetUserParams) => {
 getUser.getUrl = (id: IGetUserParams['id']) => ApiUrl.getUser.replace(':id', `${id}`)
 
 export const UserRepository = {
-  getMe,
+  login,
   getUser,
   ApiUrl
 }

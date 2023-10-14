@@ -8,7 +8,12 @@ export default defineNuxtConfig({
     }
   },
   css: ['~/assets/styling/main.css'],
-  modules: ['@pinia/nuxt', '@pinia-plugin-persistedstate/nuxt', '@hebilicious/vue-query-nuxt'],
+  modules: [
+    '@pinia/nuxt',
+    '@pinia-plugin-persistedstate/nuxt',
+    '@hebilicious/vue-query-nuxt',
+    '@vee-validate/nuxt'
+  ],
   build: {
     transpile: ['primevue']
   },

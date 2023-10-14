@@ -17,7 +17,7 @@ const isExpiredJWT = ({ response, config }: ErrResponse) =>
 const refreshToken = (token: string) => {
   console.log(token)
 
-  return { data: 'newToken' }
+  return { access: 'accessNew', refresh: 'refreshNew' }
 }
 
 export const HttpUtils = {

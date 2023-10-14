@@ -1,21 +1,21 @@
 import { UserTransform } from './UserTransform'
 import { UserRepository } from './UserRepository'
+import { ILoginQueryParams } from './UserType'
 
-const useGetMe = () => {
-  const key = UserRepository.getMe.getUrl()
+const useLogin = () => {
+  const key = UserRepository.login.getUrl()
 
-  const fetch = () =>
-    UserRepository.getMe().then((response) => UserTransform.transformUserMe(response.data))
+  const fetch = (queryParams: ILoginQueryParams) =>
+    UserRepository.login(queryParams).then((response) => UserTransform.transformUser(response.data))
 
-  const query = useQuery({
-    queryKey: [key],
-    queryFn: fetch,
-    enabled: false
+  const query = useMutation({
+    mutationKey: [key],
+    mutationFn: fetch
   })
 
   return query
 }
 
 export const UserService = {
-  useGetMe
+  useLogin
 }

@@ -1,14 +1,26 @@
 import { defineStore, acceptHMRUpdate } from 'pinia'
+import { IUser, IUserToken } from '~/services/user'
 
 export const useUserStore = defineStore('user', {
-  state: () => ({
-    accessToken: 'accessToken',
-    refreshToken: ''
+  state: (): IUser => ({
+    id: 0,
+    username: '',
+    email: '',
+    firstName: '',
+    lastName: '',
+    gender: '',
+    roles: [],
+    token: {
+      access: '',
+      refresh: ''
+    }
   }),
-  getters: {},
+  getters: {
+    isAuth: (state) => !!state.id
+  },
   actions: {
-    setToken(token: string) {
-      this.accessToken = token
+    setToken(token: IUserToken) {
+      this.token = token
     }
   },
   persist: true

@@ -14,8 +14,8 @@ export default defineNuxtPlugin(async () => {
   })
 
   axiosInstance.interceptors.request.use((config) => {
-    if (userStore.accessToken) {
-      config.headers.setAuthorization(`Bearer ${userStore.accessToken || ''}`)
+    if (userStore.token.access) {
+      config.headers.setAuthorization(`Bearer ${userStore.token.access || ''}`)
     }
 
     return config
@@ -29,8 +29,8 @@ export default defineNuxtPlugin(async () => {
         originalRequest._retry = true
 
         try {
-          const { data } = await HttpUtils.refreshToken(userStore.refreshToken)
-          userStore.setToken(data)
+          const token = await HttpUtils.refreshToken(userStore.token.refresh)
+          userStore.setToken(token)
           return await axiosInstance(originalRequest)
         } catch (_) {
           /* empty */
