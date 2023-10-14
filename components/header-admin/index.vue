@@ -21,12 +21,12 @@
           </svg>
         </button>
         <Block class="hidden xl:block xl:h-6 xl:w-px xl:bg-[#1118271a]" aria-hidden="true"></Block>
-        <TieredMenu />
+        <Menu />
       </Block>
     </Block>
   </Block>
 </template>
 
 <script setup lang="ts">
-import TieredMenu from './TieredMenu.vue'
+import Menu from './Menu.vue'
 </script>

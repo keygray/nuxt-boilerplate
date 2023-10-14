@@ -7,7 +7,7 @@ export default defineNuxtConfig({
       autoprefixer: {}
     }
   },
-  css: ['~/assets/styling/main.css'],
+  css: ['~/assets/styling/main.css', 'primeicons/primeicons.css'],
   modules: [
     '@pinia/nuxt',
     '@pinia-plugin-persistedstate/nuxt',

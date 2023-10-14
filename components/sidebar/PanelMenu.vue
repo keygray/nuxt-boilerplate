@@ -41,13 +41,13 @@ watch(
           <template #item="{ item }">
             <NuxtLink
               :to="item.url"
-              class="text-gray-400 cursor-pointer flex gap-x-3 rounded-md p-2 relative text-sm font-semibold leading-6 header-link"
+              class="text-gray-400 cursor-pointer flex items-center gap-x-3 rounded-md p-2 relative text-sm font-semibold leading-6 header-link"
               :class="{
                 'hover:text-white sidebar-item': matchedPath(item)
               }"
               active-class="!text-white bg-gray-800"
             >
-              <span class="pi pi-fw pi-pencil mr-2"></span>
+              <span :class="item.icon"></span>
               <span>{{ item.label }}</span>
               <svg
                 v-if="item.items"
