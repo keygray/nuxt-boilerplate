@@ -27,3 +27,26 @@ export interface ILoginQueryParams {
   email: string
   password: string
 }
+
+interface IRepresentative {
+  name: string
+  image: string
+}
+
+interface ICountry {
+  name: string
+  code: string
+}
+
+export interface IMember {
+  id: number
+  name: string
+  country: ICountry
+  company: string
+  date: string
+  status: string
+  verified: boolean
+  activity: number
+  representative: IRepresentative
+  balance: number
+}

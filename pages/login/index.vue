@@ -11,21 +11,29 @@
       </h2>
     </div>
 
-    <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-      <form class="space-y-6" @submit="onSubmit">
+    <div id="loginForm" class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+      <form class="space-y-7" @submit="onSubmit">
         <div>
           <label for="email" class="block text-sm font-medium leading-6 text-gray-900"
             >Email address</label
           >
-          <div class="mt-2">
+          <div class="mt-2 relative">
             <InputText
               id="email"
               v-model="email"
               type="text"
-              :class="{ 'border-rose-500': errEmail }"
+              :class="{ '!ring-2 !ring-rose-500 err-msg': errEmail }"
               aria-describedby="text-error"
               class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             />
+
+            <span
+              v-if="errEmail"
+              severity="error"
+              class="w-full text-xs mt-1 text-red-500 absolute top-full left-0"
+            >
+              {{ errEmail }}
+            </span>
           </div>
         </div>
 
@@ -40,17 +48,27 @@
               >
             </div>
           </div>
-          <div class="mt-2">
+          <div class="mt-2 relative">
             <Password
               v-model="pwd"
               :feedback="false"
               class="w-full"
               :pt="{
-                input:
-                  'block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
+                input: [
+                  'block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6',
+                  { '!ring-2 !ring-rose-500 err-msg': errPwd }
+                ]
               }"
               toggle-mask
             />
+
+            <span
+              v-if="errPwd"
+              severity="error"
+              class="w-full text-xs mt-1 text-red-500 absolute top-full left-0"
+            >
+              {{ errPwd }}
+            </span>
           </div>
         </div>
 
@@ -98,12 +116,15 @@ const { handleSubmit } = useForm<ILoginQueryParams>({
     password: 'p@$$w0rd'
   },
   validationSchema: {
-    email: yup.string().required(),
+    email: yup
+      .string()
+      .required('Email is a required field')
+      .email('This is must be a valid email'),
     password: yup.string().required().min(8)
   }
 })
 const { value: email, errorMessage: errEmail } = useField<string>('email')
-const { value: pwd } = useField<string>('password')
+const { value: pwd, errorMessage: errPwd } = useField<string>('password')
 
 /** @Handler */
 const { isLoading, mutate } = UserService.useLogin()
@@ -126,3 +147,9 @@ useHead({
   title: 'Login Admin'
 })
 </script>
+
+<style lang="scss">
+#loginForm .err-msg {
+  background-color: #fff6f7;
+}
+</style>

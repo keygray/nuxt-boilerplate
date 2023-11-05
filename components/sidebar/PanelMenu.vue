@@ -2,6 +2,7 @@
 import { MenuItem } from 'primevue/menuitem'
 import PanelMenu from 'primevue/panelmenu'
 import { panelMenuConfig } from '~/config'
+import Tailwind from 'primevue/passthrough/tailwind'
 
 /** @Define */
 const expandedKeys = ref({})
@@ -29,8 +30,10 @@ watch(
       <li>
         <PanelMenu
           v-model:expanded-keys="expandedKeys"
+          unstyled
           :model="items"
           :pt="{
+            ...Tailwind.panelmenu,
             root: 'mx-[-0.5rem] sidebar relative',
             header: 'outline-0',
             headercontent: '',

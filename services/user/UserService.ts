@@ -16,6 +16,21 @@ const useLogin = () => {
   return query
 }
 
+const useUsers = () => {
+  const key = UserRepository.getUsers.getUrl()
+
+  const fetch = () =>
+    UserRepository.getUsers().then((response) => UserTransform.transformGetUsers(response.data))
+
+  const query = useQuery({
+    queryKey: [key],
+    queryFn: fetch
+  })
+
+  return query
+}
+
 export const UserService = {
-  useLogin
+  useLogin,
+  useUsers
 }

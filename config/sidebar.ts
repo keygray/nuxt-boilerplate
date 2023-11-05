@@ -91,7 +91,8 @@ export const panelMenuConfig: MenuItem[] = [
           {
             key: '2_2_1',
             icon: 'pi pi-fw pi-bars',
-            label: 'List'
+            label: 'List',
+            url: '/admin/user'
           }
         ]
       }
