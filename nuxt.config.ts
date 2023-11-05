@@ -7,7 +7,11 @@ export default defineNuxtConfig({
       autoprefixer: {}
     }
   },
-  css: ['~/assets/styling/main.css', 'primeicons/primeicons.css'],
+  css: [
+    '~/assets/styling/main.css',
+    'primeicons/primeicons.css',
+    'primevue/resources/themes/lara-light-indigo/theme.css'
+  ],
   modules: [
     '@pinia/nuxt',
     '@pinia-plugin-persistedstate/nuxt',
@@ -21,5 +25,8 @@ export default defineNuxtConfig({
     public: {
       baseUrl: process.env.BASE_URL || '/'
     }
+  },
+  routeRules: {
+    '/admin/**': { ssr: false }
   }
 })
